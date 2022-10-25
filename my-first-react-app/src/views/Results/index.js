@@ -6,12 +6,25 @@ import List from './components/List';
 
 const Results = () => {
     const { title } = useParams();
-    const { data: movies, error, isLoading, isFetching } = useFetchMoviesQuery(title, 1);
+    const { data: movies, isLoading, isFetching, isSuccess, error } = useFetchMoviesQuery(title, 1);
+
+    const renderContent = () => {
+        if(error)
+            return (
+            <div className='flex items-center justify-center h-full'>
+                <p className='text-xl'>{error.error}</p>
+            </div>
+            );
+        else if (isLoading || isFetching)
+            return <Loading/>
+        else if (isSuccess && movies?.Search)
+            return <List data={ movies?.Search }/>
+    };
 
     return (
     <div className='flex flex-row'>
         <div className='w-3/5 h-screen overflow-y-auto px-10'>
-            {isLoading && isFetching ? <Loading/> : <List data={ movies?.Search }/>}
+            {renderContent()}
         </div>
         <div className='w-2/5'>
             <img src={moviesImage} alt='Movies theater' className='w-full h-screen object-cover'/>
