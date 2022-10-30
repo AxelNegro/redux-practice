@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import moviesImage from "../../assets/movie_theater.png";
 import { useFetchMoviesQuery } from '../../redux/api/movies';
 import Loading from './components/Loading';
@@ -7,6 +7,10 @@ import List from './components/List';
 const Results = () => {
     const { title } = useParams();
     const { data: movies, isLoading, isFetching, isSuccess, error } = useFetchMoviesQuery(title, 1);
+    const navigate = useNavigate();
+    const handleListItemClick = (id) => {
+        navigate(`/detail/${id}`);
+    };
 
     const renderContent = () => {
         if(error)
@@ -18,7 +22,7 @@ const Results = () => {
         else if (isLoading || isFetching)
             return <Loading/>
         else if (isSuccess && movies?.Search)
-            return <List data={ movies?.Search }/>
+            return <List data={ movies?.Search } onListItemClick={handleListItemClick} />
     };
 
     return (

@@ -7,7 +7,7 @@ const headers = { // headers that's gonna use our API
 
 export const moviesApi = createApi({
     reducerPath: 'moviesApi', // name of the reducer
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://movie-database-alternative.asdp.rapidapi.com/'}), // base url
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://movie-database-alternative.p.rapidapi.com/'}), // base url
     endpoints: (builder) => ({
         fetchMovies: builder.query({ // query for GETs, mutation for all other methods.
             query: (s, page) => ({ // parameters
