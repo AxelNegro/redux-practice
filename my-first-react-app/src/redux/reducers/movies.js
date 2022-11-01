@@ -1,37 +1,40 @@
-import { errorFetchMovieRatings, startFetchMovieRatings, successFetchMovieRatings } from "../actions/movies";
+import { errorFetchMovieDetails,
+    startFetchMovieDetails,
+    successFetchMovieDetails
+ } from "../actions/movies";
 
 const initialState = {
     isFetching: false,
     isLoading: false,
     error: null,
     success: null,
-    rating: {}
+    details: {}
 }
 
 const MoviesReducer = (state = initialState, action) =>  {
     switch(action.type) {
-        case startFetchMovieRatings.toString():
+        case startFetchMovieDetails.toString():
             return { 
                 ...state,
-                isLoading: true,
+                isLoading: false,
                 isFetching: true,
             };
         break;
-        case successFetchMovieRatings.toString():
+        case successFetchMovieDetails.toString():
             return {
                 ...state,
                 isLoading: false,
                 isFetching: false,
-                ratings: action.payload.data,
+                details: action.payload.data,
                 success: true,
                 error: null,
             };
-        case errorFetchMovieRatings.toString():
+        case errorFetchMovieDetails.toString():
             return {
                 ...state,
                 isLoading: false,
                 isFetching: false,
-                ratings: {},
+                details: {},
                 success: false,
                 error: action.payload.error
             };

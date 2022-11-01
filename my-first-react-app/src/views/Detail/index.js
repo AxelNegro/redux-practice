@@ -1,14 +1,15 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
-import { fetchMovieRatings } from "../../redux/actions/movies";
+import { fetchMovieDetails } from "../../redux/actions/movies";
 
 const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-
+    const { success, error, isFetching, isLoading, details } = useSelector((state) => state.MoviesReducer);
+    console.log(details)
     useEffect(() => {
-        dispatch(fetchMovieRatings(id));
+        dispatch(fetchMovieDetails(id));
     }, [dispatch, id]);
     return (<div>Detail</div>);
 };

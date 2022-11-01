@@ -6,19 +6,19 @@ const headers = {
     'X-RapidAPI-Host': 'movie-details1.p.rapidapi.com'
 }
 
-export const startFetchMovieRatings = createAction('START_FETCH_MOVIE_RATINGS');
-export const successFetchMovieRatings = createAction('SUCCESS_FETCH_MOVIE_RATINGS');
-export const errorFetchMovieRatings = createAction('ERROR_FETCH_MOVIE_RATINGS');
+export const startFetchMovieDetails = createAction('START_FETCH_MOVIE_DETAILS');
+export const successFetchMovieDetails = createAction('SUCCESS_FETCH_MOVIE_DETAILS');
+export const errorFetchMovieDetails = createAction('ERROR_FETCH_MOVIE_DETAILS');
 
-export const fetchMovieRatings = (id) => async (dispatch) => {
+export const fetchMovieDetails = (id) => async (dispatch) => {
     try{
-        dispatch(startFetchMovieRatings());
+        dispatch(startFetchMovieDetails());
 
         const response = await fetch(`${BASE_URL}/imdb_api/movie?id=${id}`, {headers});
         const data = await response.json();
-        
-        dispatch(successFetchMovieRatings({data}));
+
+        dispatch(successFetchMovieDetails({data}));
     } catch (error){
-        dispatch(errorFetchMovieRatings({error}))
+        dispatch(errorFetchMovieDetails({error}))
     }
 }
