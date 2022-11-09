@@ -8,7 +8,7 @@ import RightContainer from "./components/RightContainer";
 const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { error, isFetching, isLoading, details } = useSelector((state) => state.MoviesReducer);
+    const { error, isFetching, isLoading, details } = useSelector((state) => state.MoviesReducerSlice);
 
     useEffect(() => {
         dispatch(fetchMovieDetails(id));
